@@ -1,6 +1,6 @@
 
 
-# ESPHome Based Line Voltage (Baseboard) Thermostat From Wall Switch
+# ESPHome Based Line Voltage (Baseboard Heating) Thermostat From Wall Switch
 I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.
 
 ## :warning:***Warning***:warning: 
@@ -26,3 +26,4 @@ I recommend flashing the ESP before you start soldering parts onto it.  Unfortun
 :warning: *Power the ESP from 3.3V on the USB-UART during flashing.* ***Do not connect line power during flashing!*** :warning:
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
+
