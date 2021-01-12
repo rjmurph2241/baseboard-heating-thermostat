@@ -23,7 +23,6 @@ I recently wanted to add smart thermostats to my apartment.  However, I was surp
 ## Flashing ##
 I recommend flashing the ESP before you start soldering parts onto it.  Unfortunately Tuya Convert no longer seems to work due to the new Tuya firmware, so you'll have to use a USB-UART converter and solder connections.  My smart switch was based on a TYWE3S and I used the Tasmota instructions available [here](https://tasmota.github.io/docs/devices/TYWE3S/) for flashing.
 
-:warning: *Power the ESP from 3.3V on the USB-UART during flashing.* ***Do not connect line power during flashing!***
+:warning: *Power the ESP from 3.3V on the USB-UART during flashing.* ***Do not connect line power during flashing!*** :warning:
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
-
