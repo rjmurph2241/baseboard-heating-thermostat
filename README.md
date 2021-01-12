@@ -27,9 +27,8 @@ I recommend flashing the ESP before you start soldering parts onto it.  Unfortun
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
 
-<<<<<<< Updated upstream
 <img src="/images/flashing.jpg" width="250px" />
-=======
+
 ![Flashing](/images/flashing.jpg)
 
 In addition to the thermostat.yaml file, you will also need a font file (I used  [Open Sans](https://fonts.google.com/specimen/Open+Sans#standard-styles) and 4 image files of Material Design Icons:
@@ -37,4 +36,3 @@ In addition to the thermostat.yaml file, you will also need a font file (I used 
 * [radiator](https://materialdesignicons.com/icon/radiator)
 * [radiator-off](https://materialdesignicons.com/icon/radiator-off)
 * [thermometer](https://materialdesignicons.com/icon/thermometer)
->>>>>>> Stashed changes
