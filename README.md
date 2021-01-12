@@ -61,8 +61,8 @@ The AM2302 requires a pull-up resistor on the data line, so that was soldered on
 ### Enclosure
 The enclosure was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.
 
-## Putting it all Together
+## Putting It All Together
 ![](/images/inside-case.jpg)
 
 ## Thermostat Operation
-The thermostat will work even when disconnected from Home Assistant/ ESPHome.  To change the temperature, you short press the rotary encoder and you can adjust the temperature set-point in 0.1^o increments.  Another short press sets the new set-point.  To toggle the thermostat on or off, simply long press the rotary encoder.
+The thermostat will work even when disconnected from Home Assistant/ ESPHome.  To change the temperature, you short press the rotary encoder and you can adjust the temperature set-point in 0.1<sup>o</sup> increments.  Another short press sets the new set-point.  To toggle the thermostat on or off, simply long press the rotary encoder.
