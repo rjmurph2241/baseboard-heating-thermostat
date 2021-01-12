@@ -1,13 +1,14 @@
 
 
 # ESPHome Based Line Voltage (Baseboard) Thermostat From Wall Switch
-I recently wanted to add smart thermostats to my apartment.  However, I was supprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.
+I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.
 
 ## :warning:***Warning***:warning: 
 ***This project involves line voltage, which can be extremely dangerous and deadly.  I am not an electrician or electrical engineer so proceed at your own risk.  Always turn off the power at the breaker and ~~double~~ triple check the power is disconnected before touching any wires.***
 
 ## Parts List ##
-1. A ESP based smart wall switch, with accessible GPIO pins.  I used [this one](https://www.amazon.com/gp/product/B07VMDS9RJ), but others will probably work as well.
+1. A ESP based smart wall switch, with accessible GPIO pins.  I used a Laghten smart switch ([Amazon Link](https://www.amazon.com/gp/product/B07VMDS9RJ)), but others will probably work as well.
+1. A USB-UART (USB to TTL converter) for flashing 
 1. DHT22/AM2302
 1. Rotary encoder with push button
 1. 128X64 (0.96") SSD1306 OLED display
@@ -16,4 +17,12 @@ I recently wanted to add smart thermostats to my apartment.  However, I was supp
 1. 4x wire nuts (I reused the ones already in the wall)
 1. 2X #6 screws for the switch
 1. 3D printed case
+1. Hot glue gun
 1. 2X #6 x 1" decorative wall plate screws (colored to match your 3D printed case)
+
+## Flashing ##
+I recommend flashing the ESP before you start soldering parts onto it.  Unfortunately Tuya Convert no longer seems to work due to the new Tuya firmware, so you'll have to use a USB-UART converter and solder connections.
+My smart switch was based on a TYWE3S and I used the Tasmota instructions available [here](https://tasmota.github.io/docs/devices/TYWE3S/) for flashing.
+:warning: *Power the ESP from 3.3V on the USB-UART during flashing.* ***Do not connect line power during flashing!***
+I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
+
