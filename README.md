@@ -89,11 +89,11 @@ As I am not an electrician, I don't want to give detailed instructions on how to
 1. Use a non-contact voltage tester to make sure theres no power! (Seriously this is important!) :warning:
 1. Connect the wires appropriately.
 1. Screw in the switch
-	1. ![](https://via.placeholder.com/100x200)
+	![](https://via.placeholder.com/100x200)
 1. Connect the 3.3V and data cables to the components in the 3D printed case.
-	1. ![](https://via.placeholder.com/100x200)
+	![](https://via.placeholder.com/100x200)
 1. Screw on the 3D printed case
-	1.  ![](https://via.placeholder.com/100x200)
+	![](https://via.placeholder.com/100x200)
 1. Cross your fingers & turn back on the power
 
 ## Thermostat Operation
