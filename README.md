@@ -29,8 +29,10 @@ I found it easiest to remove the entire board with the ESP from the switch to fl
 
 ![Flashing](/images/flashing.jpg)
 
-In addition to the thermostat.yaml file, you will also need a font file (I used  [Open Sans](https://fonts.google.com/specimen/Open+Sans#standard-styles) and 4 image files of Material Design Icons:
+In addition to the thermostat.yaml file, you will also need a font file (I used  [Open Sans](https://fonts.google.com/specimen/Open+Sans#standard-styles)) and 4 image files from Material Design Icons:
 * [fire](https://materialdesignicons.com/icon/fire)
 * [radiator](https://materialdesignicons.com/icon/radiator)
 * [radiator-off](https://materialdesignicons.com/icon/radiator-off)
 * [thermometer](https://materialdesignicons.com/icon/thermometer)
+
+The MDI icons and font file will need to be in the same directory as the .yaml file.
