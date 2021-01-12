@@ -8,7 +8,7 @@ substitutions:
   encode_pin_2: GPIO14
   encode_sw_pin: GPIO2
   relay_pin: GPIO12
-  offset: '-2.4'
+  offset: '-2.4' #offset is in oC.
 
 wifi:
   ssid: "your_ssid"
