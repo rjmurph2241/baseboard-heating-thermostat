@@ -25,8 +25,6 @@ I recommend flashing the ESP before you start soldering parts onto it.  Unfortun
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
 
-
-
 ![Flashing](/images/flashing.jpg)
 
 In addition to the thermostat.yaml file, you will also need a font file (I used  [Open Sans](https://fonts.google.com/specimen/Open+Sans#standard-styles)) and 4 image files from Material Design Icons:
@@ -84,9 +82,9 @@ I like to try and make things as re-usable as possible so I prefer to use hot gl
 
 ### Installing It On The Wall
 As I am not an electrician, I don't want to give detailed instructions on how to install.  The basics are:
-1. Make sure the power is turned off at the breaker :warning:
-1. Check again that the power is turned off :warning:
-1. Use a non-contact voltage tester to make sure theres no power! (Seriously this is important!) :warning:
+1. :warning: Make sure the power is turned off at the breaker :warning:
+1. :warning: Check again that the power is turned off :warning:
+1. :warning: Use a non-contact voltage tester to make sure theres no power! (Seriously this is important!) :warning:
 1. Connect the wires appropriately.
 1. Screw in the switch
 	
