@@ -1,5 +1,3 @@
-
-
 # ESPHome Based Line Voltage (Baseboard Heating) Thermostat From Wall Switch
 I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.  I also set myself a goal of making the entire thing reversible back to a wall switch if I ever moved to a place where I no longer needed line voltage thermostats and I *mostly* succeeded.  I had to de-solder the microswitch, but otherwise everything is reversible and it'd be easy enough to re-solder if I want to switch back.
 
@@ -27,6 +25,8 @@ I recommend flashing the ESP before you start soldering parts onto it.  Unfortun
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
 
+
+
 ![Flashing](/images/flashing.jpg)
 
 In addition to the thermostat.yaml file, you will also need a font file (I used  [Open Sans](https://fonts.google.com/specimen/Open+Sans#standard-styles)) and 4 image files from Material Design Icons:
@@ -46,6 +46,8 @@ I also used pre-wired JST connectors to make removing the cover easier once all 
 
 ![JST Connectors](/images/jst-connectors.jpg)
 
+You also need to de-solder the microswitch or the encoder won't fit.  Save it for later along with the front plates if you ever want to change it back to a wall switch.
+
 ### OLED Display
 In order to get the OLED display to fit into the case, I de-soldered the header pins from the board and just soldered the wires directly onto the back.
 
@@ -58,12 +60,41 @@ The AM2302 requires a pull-up resistor on the data line, so that was soldered on
 ![](/images/am2302-final.jpg)
 
 ### Rotary Encoder
+The encoder has 2 separate connections.  The encoder and the push button.  For the push button, one connection should be GND and the other connected to an GPIO pin.  For the encoder portion, the center pin should be GND and the other two connected to GPIO pins.  I connected the two GND connections at the encoder and only ran one wire back to the ESP's GND.
 
-### Enclosure
-The enclosure was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed it on my Monoprice Select Mini Pro.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
+![encoder](/images/encoder.jmp)
+
+### Case
+The case was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
+
+![case](https://via.placeholder.com/250x400)
 
 ## Putting It All Together
+Before gluing or closing anything up, it's always good to do a quick test to make sure all your connections are secure.
+
+**:warning: When testing using line voltage, always put wire nuts over any unconnected wires (switched wire) and never touch any exposed connections! :warning:**
+
+![testing](/images/testing.jpg)
+
+(This image was taken before I realized the microswitch didn't fit.  Don't be like me and remove the switch before you try and put everything together!)
+
+I like to try and make things as re-usable as possible so I prefer to use hot glue to hold everything together.  
+
 ![](/images/inside-case.jpg)
+
+### Installing It On The Wall
+As I am not an electrician, I don't want to give detailed instructions on how to install.  The basics are:
+1. Make sure the power is turned off at the breaker :warning:
+1. Check again that the power is turned off :warning:
+1. Use a non-contact voltage tester to make sure theres no power! (Seriously this is important!) :warning:
+1. Connect the wires appropriately.
+1. Screw in the switch
+	1. ![](https://via.placeholder.com/100x200)
+1. Connect the 3.3V and data cables to the components in the 3D printed case.
+	1. ![](https://via.placeholder.com/100x200)
+1. Screw on the 3D printed case
+	1.  ![](https://via.placeholder.com/100x200)
+1. Cross your fingers & turn back on the power
 
 ## Thermostat Operation
 The thermostat will work even when disconnected from Home Assistant/ ESPHome.  To change the temperature, you short press the rotary encoder and you can adjust the temperature set-point in 0.1<sup>o</sup> increments.  Another short press sets the new set-point.  To toggle the thermostat on or off, simply long press the rotary encoder.
