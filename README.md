@@ -60,7 +60,7 @@ The AM2302 requires a pull-up resistor on the data line, so that was soldered on
 ### Rotary Encoder
 The encoder has 2 separate connections.  The encoder and the push button.  For the push button, one connection should be GND and the other connected to an GPIO pin.  For the encoder portion, the center pin should be GND and the other two connected to GPIO pins.  I connected the two GND connections at the encoder and only ran one wire back to the ESP's GND.
 
-![encoder](/images/encoder.jmp)
+![encoder](/images/encoder.jpg)
 
 ### Case
 The case was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
