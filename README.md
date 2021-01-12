@@ -27,4 +27,4 @@ I recommend flashing the ESP before you start soldering parts onto it.  Unfortun
 
 I found it easiest to remove the entire board with the ESP from the switch to flash and solder on components.
 
-![Flashing](/images/flashing.jpg =250x300)
+<img src="/images/flashing.jpg" width="250px" />
