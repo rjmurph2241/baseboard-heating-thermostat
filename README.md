@@ -9,9 +9,9 @@ I recently wanted to add smart thermostats to my apartment.  However, I was surp
 ## Parts List ##
 1. A ESP based smart wall switch, with accessible GPIO pins.  I used a Laghten smart switch ([Amazon Link](https://www.amazon.com/gp/product/B07VMDS9RJ)), but others will probably work as well.
 1. A USB-UART (USB to TTL converter) for flashing 
-1. DHT22/AM2302
-1. Rotary encoder with push button
-1. 128X64 (0.96") SSD1306 OLED display
+1. DHT22/AM2302 ([Amazon Link](https://www.amazon.com/gp/product/B01JGNL2LM))
+1. Rotary encoder with push button ([Amazon Link](https://www.amazon.com/gp/product/B08728K3YB))
+1. 128X64 (0.96") SSD1306 OLED display ([Amazon Link](https://www.amazon.com/PEMENOL-Display-0-96inch-Raspberry-Microcontroller/dp/B07F3KY8NF))
 1. JST battery connectors (optional)
 1. A couple 4.7K resistors
 1. 4x wire nuts (I reused the ones already in the wall)
@@ -48,6 +48,7 @@ I also used pre-wired JST connectors to make removing the cover easier once all 
 
 ### OLED Display
 In order to get the OLED display to fit into the case, I de-soldered the header pins from the board and just soldered the wires directly onto the back.
+
 ![OLED](/images/oled.jpg)
 
 ### Temperature Sensor
@@ -59,7 +60,7 @@ The AM2302 requires a pull-up resistor on the data line, so that was soldered on
 ### Rotary Encoder
 
 ### Enclosure
-The enclosure was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.
+The enclosure was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed it on my Monoprice Select Mini Pro.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
 
 ## Putting It All Together
 ![](/images/inside-case.jpg)
