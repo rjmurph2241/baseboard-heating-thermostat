@@ -1,7 +1,7 @@
 
 
 # ESPHome Based Line Voltage (Baseboard Heating) Thermostat From Wall Switch
-I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.  I also set myself a goal of making the entire thing reversible back to a wall switch if I ever moved to a place where I no longer needed line voltage thermostats and I *mostly* suceeded.  I had to desolder the microswitch, but otherwise everything is reversible and it'd be easy enough to resolder if I want to switch back.
+I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.  I also set myself a goal of making the entire thing reversible back to a wall switch if I ever moved to a place where I no longer needed line voltage thermostats and I *mostly* succeeded.  I had to de-solder the microswitch, but otherwise everything is reversible and it'd be easy enough to re-solder if I want to switch back.
 
 ## :warning:***Warning***:warning: 
 ***This project involves line voltage, which can be extremely dangerous and deadly.  I am not an electrician or electrical engineer so proceed at your own risk.  Always turn off the power at the breaker and ~~double~~ triple check the power is disconnected before touching any wires.***
@@ -47,9 +47,22 @@ I also used pre-wired JST connectors to make removing the cover easier once all 
 ![JST Connectors](/images/jst-connectors.jpg)
 
 ### OLED Display
+In order to get the OLED display to fit into the case, I de-soldered the header pins from the board and just soldered the wires directly onto the back.
+![OLED](/images/oled.jpg)
 
 ### Temperature Sensor
+The AM2302 requires a pull-up resistor on the data line, so that was soldered on first along with the data wire.  Then the power wires were added.
+
+![](/images/am2302-resistor.jpg)
+![](/images/am2302-final.jpg)
 
 ### Rotary Encoder
 
+### Enclosure
+The enclosure was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.
 
+## Putting it all Together
+![](/images/inside-case.jpg)
+
+## Thermostat Operation
+The thermostat will work even when disconnected from Home Assistant/ ESPHome.  To change the temperature, you short press the rotary encoder and you can adjust the temperature set-point in 0.1^o increments.  Another short press sets the new set-point.  To toggle the thermostat on or off, simply long press the rotary encoder.
