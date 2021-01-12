@@ -11,7 +11,7 @@ I recently wanted to add smart thermostats to my apartment.  However, I was surp
 1. Rotary encoder with push button ([Amazon Link](https://www.amazon.com/gp/product/B08728K3YB))
 1. 128X64 (0.96") SSD1306 OLED display ([Amazon Link](https://www.amazon.com/PEMENOL-Display-0-96inch-Raspberry-Microcontroller/dp/B07F3KY8NF))
 1. JST battery connectors (optional)
-1. A couple 4.7K resistors
+1. A 4.7K resistor
 1. 4x wire nuts (I reused the ones already in the wall)
 1. 2X #6 screws for the switch
 1. 3D printed case
