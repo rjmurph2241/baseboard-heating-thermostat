@@ -1,7 +1,7 @@
 
 
 # ESPHome Based Line Voltage (Baseboard Heating) Thermostat From Wall Switch
-I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.
+I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.  I also set myself a goal of making the entire thing reversible back to a wall switch if I ever moved to a place where I no longer needed line voltage thermostats and I *mostly* suceeded.  I had to desolder the microswitch, but otherwise everything is reversible and it'd be easy enough to resolder if I want to switch back.
 
 ## :warning:***Warning***:warning: 
 ***This project involves line voltage, which can be extremely dangerous and deadly.  I am not an electrician or electrical engineer so proceed at your own risk.  Always turn off the power at the breaker and ~~double~~ triple check the power is disconnected before touching any wires.***
