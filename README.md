@@ -38,9 +38,12 @@ In addition to the thermostat.yaml file, you will also need a font file (I used 
 The MDI icons and font file will need to be in the same directory as the .yaml file.
 
 ## Soldering Components
-Here is the pinout I used.  Other configurations would likely work but I know I couldn't get the OLED display to work connected to GPIO13 & GPIO14.
+Here is the pinout I used.  Other configurations would likely work but I know this one worked for me.
+
+![pinout](https://via.placeholder.com/250x400)
 
 I also used pre-wired JST connectors to make removing the cover easier once all the components were soldered together and I used sharpie to color code the different connections.
+
 ![JST Connectors](/images/jst-connectors.jpg)
 
 ### OLED Display
