@@ -11,7 +11,7 @@ I recently wanted to add smart thermostats to my apartment.  However, I was surp
 1. Rotary encoder with push button ([Amazon Link](https://www.amazon.com/gp/product/B08728K3YB))
 1. 128X64 (0.96") SSD1306 OLED display ([Amazon Link](https://www.amazon.com/PEMENOL-Display-0-96inch-Raspberry-Microcontroller/dp/B07F3KY8NF))
 1. JST battery connectors (optional)
-1. A couple 4.7K resistors
+1. A 4.7K resistor
 1. 4x wire nuts (I reused the ones already in the wall)
 1. 2X #6 screws for the switch
 1. 3D printed case
@@ -62,7 +62,7 @@ The AM2302 requires a pull-up resistor on the data line, so that was soldered on
 ### Rotary Encoder
 The encoder has 2 separate connections.  The encoder and the push button.  For the push button, one connection should be GND and the other connected to an GPIO pin.  For the encoder portion, the center pin should be GND and the other two connected to GPIO pins.  I connected the two GND connections at the encoder and only ran one wire back to the ESP's GND.
 
-![encoder](/images/encoder.jmp)
+![encoder](/images/encoder.jpg)
 
 ### Case
 The case was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
