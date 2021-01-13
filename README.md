@@ -44,7 +44,9 @@ I also used pre-wired JST connectors to make removing the cover easier once all 
 
 ![JST Connectors](/images/jst-connectors.jpg)
 
-You also need to de-solder the microswitch or the encoder won't fit.  Save it for later along with the front plates if you ever want to change it back to a wall switch.
+You also need to de-solder the microswitch or the encoder won't fit.  Save it along with the front plates if you ever want to change it back to a wall switch.
+
+![microswitch](https://via.placeholder.com/250x400)
 
 ### OLED Display
 In order to get the OLED display to fit into the case, I de-soldered the header pins from the board and just soldered the wires directly onto the back.
@@ -74,7 +76,7 @@ Before gluing or closing anything up, it's always good to do a quick test to mak
 
 ![testing](/images/testing.jpg)
 
-(This image was taken before I realized the microswitch didn't fit.  Don't be like me and remove the switch before you try and put everything together!)
+(This image was taken before I realized the microswitch didn't fit.)
 
 I like to try and make things as re-usable as possible so I prefer to use hot glue to hold everything together.  
 
