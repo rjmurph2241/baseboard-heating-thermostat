@@ -38,14 +38,6 @@ ota:
 
 
 script:
-- id: heater_cycle
-  then:
-    while:
-      condition:
-        script.is_running: heater_cycle
-      then: 
-      - switch.toggle: heater
-      - delay: 60s  
 - id: encode_setpoint
   then:
   - sensor.rotary_encoder.set_value:
@@ -142,11 +134,8 @@ climate:
     default_target_temperature_low: 19.444 °C
     hysteresis: 0.1
     heat_action:
-      # - script.execute: heater_cycle
       switch.turn_on: heater
     idle_action:
-      # - script.stop: heater_cycle
-      # - switch.turn_off: heater
       switch.turn_off: heater
 
 font:
