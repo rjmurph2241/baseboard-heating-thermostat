@@ -4,6 +4,8 @@ I recently wanted to add smart thermostats to my apartment.  However, I was surp
 ## :warning:***Warning***:warning: 
 ***This project involves line voltage, which can be extremely dangerous and deadly.  I am not an electrician or electrical engineer so proceed at your own risk.  Always turn off the power at the breaker and ~~double~~ triple check the power is disconnected before touching any wires.***
 
+![](/images/finished_thermostat.jpg)
+
 ## Parts List ##
 1. A ESP based smart wall switch, with accessible GPIO pins.  I used a Laghten smart switch ([Amazon Link](https://www.amazon.com/gp/product/B07VMDS9RJ)), but others will probably work as well.
 1. A USB-UART (USB to TTL converter) for flashing 
