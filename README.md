@@ -69,7 +69,7 @@ The encoder has 2 separate connections.  The encoder and the push button.  For t
 ### Case
 The case was designed in Alibre Atom 3D.  I've included the original file as well as the .stl and .step if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
 
-![case](https://via.placeholder.com/250x400)
+![case](/images/cad_front.jpg)
 
 ## Putting It All Together
 Before gluing or closing anything up, it's always good to do a quick test to make sure all your connections are secure.
