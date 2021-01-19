@@ -85,7 +85,7 @@ I like to try and make things as re-usable as possible so I prefer to use hot gl
 ![](/images/inside-case.jpg)
 
 ### Installing It On The Wall
-As I am not an electrician, I don't want to give detailed instructions on how to install.  The basics are:
+As I am not an electrician, I don't want to give detailed instructions on how to install the high voltage aspects.  The basics of installing the thermostat are:
 1. :warning: Make sure the power is turned off at the breaker :warning:
 1. :warning: Check again that the power is turned off :warning:
 1. :warning: Use a non-contact voltage tester to make sure theres no power! (Seriously this is important!) :warning:
