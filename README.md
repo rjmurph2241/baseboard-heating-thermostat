@@ -67,7 +67,7 @@ The encoder has 2 separate connections.  The encoder and the push button.  For t
 ![encoder](/images/encoder.jpg)
 
 ### Case
-The case was designed in Alibre Atom 3D.  I've included the original file as well as the [.stl](/thermostat cover.stl) and [STEP](/thermostat cover.stp) files if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
+The case was designed in Alibre Atom 3D.  I've included the original file as well as the [.stl](/thermostat_cover.stl) and [STEP](/thermostat_cover.stp) files if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
 
 ![case](/images/cad_front.jpg)
 
