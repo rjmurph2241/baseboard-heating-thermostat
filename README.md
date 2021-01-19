@@ -92,13 +92,9 @@ As I am not an electrician, I don't want to give detailed instructions on how to
 1. Connect the wires appropriately.
 1. Screw in the switch
 	
-	![](https://via.placeholder.com/100x200)
+	![](/images/thermostat_open.jpg)
 1. Connect the 3.3V and data cables to the components in the 3D printed case.
-	
-	![](https://via.placeholder.com/100x200)
 1. Screw on the 3D printed case
-	
-	![](https://via.placeholder.com/100x200)
 1. Cross your fingers & turn back on the power
 
 ## Thermostat Operation
