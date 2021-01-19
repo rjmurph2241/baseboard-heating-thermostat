@@ -40,7 +40,7 @@ The MDI icons and font file will need to be in the same directory as the .yaml f
 ## Soldering Components
 Here is the pinout I used.  Other configurations would likely work but I know this one worked for me.
 
-![pinout](https://via.placeholder.com/250x400)
+![pinout](/images/thermostat_pinout.jpg)
 
 I also used pre-wired JST connectors to make removing the cover easier once all the components were soldered together and I used sharpie to color code the different connections.
 
