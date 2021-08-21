@@ -1,6 +1,9 @@
 # ESPHome Based Line Voltage (Baseboard Heating) Thermostat From Wall Switch
 I recently wanted to add smart thermostats to my apartment.  However, I was surprised by the lack of inexpensive, line voltage (or baseboard) smart thermostats.  Especially since there's so many cheap smart wall switches, and a line voltage thermostat is just a wall switch with a temperature sensor and some type of UI.  So I decided to make some.  I also set myself a goal of making the entire thing reversible back to a wall switch if I ever moved to a place where I no longer needed line voltage thermostats and I *mostly* succeeded.  I had to de-solder the microswitch, but otherwise everything is reversible and it'd be easy enough to re-solder if I want to switch back.
 
+##Update August 21, 2021:
+The 2021.08 ESPHome update had some breaking changes to how it handels thermostats.  The YAML config file has been updated to work with the new version of ESPHome.
+
 ## :warning:***Warning***:warning: 
 ***This project involves line voltage, which can be extremely dangerous and deadly.  I am not an electrician or electrical engineer so proceed at your own risk.  Always turn off the power at the breaker and ~~double~~ triple check the power is disconnected before touching any wires.***
 
