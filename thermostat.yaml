@@ -24,7 +24,7 @@ api:
 ota:
   password: "ota_password"
   
-  esphome:
+ esphome:
   name: $devicename
   platform: ESP8266
   board: esp01_1m
@@ -35,8 +35,7 @@ ota:
         auto call = id(therm).make_call();
         call.set_mode("Heat");
         call.perform();
-
-
+        
 script:
 - id: encode_setpoint
   then:
@@ -82,11 +81,15 @@ sensor:
       mode: INPUT_PULLUP
 
 switch:
+  #heater
   - platform: gpio
     pin: $relay_pin
     id: heater
+    restore_mode: always_off
+  #switch to activate/cancel setting the temperature
   - platform: template
     id: template_switch
+    restore_state: false
     optimistic: true
     turn_on_action:
     - script.execute: encode_setpoint
@@ -105,12 +108,14 @@ binary_sensor:
     filters:
     - delayed_on_off: 10ms
     on_multi_click:
+    #short click to set temperature
     - timing:
       - ON for at most 1s
       - OFF for at least 0.5s
       then:
       - logger.log: "Single Short Click"
       - switch.toggle: template_switch
+    #long click to change turn heating on/off
     - timing:
       - ON for at least 1s
       then:
@@ -119,9 +124,11 @@ binary_sensor:
           auto call = id(therm).make_call();
           if(id(therm).mode == 0) {
             call.set_mode("HEAT");
+            //id(heater_mode) = 1;
           }
           else {
             call.set_mode("OFF");
+            //id(heater_mode) = 0;
             }
           call.perform();
     
@@ -132,17 +139,25 @@ climate:
     name: $thermostat_name
     sensor: temp
     default_target_temperature_low: 19.444 °C
-    hysteresis: 0.1
+    #heating config
+    heat_deadband: 0.1 °C
+    heat_overrun: 0.1 °C
+    min_heating_off_time: 60 s
+    min_heating_run_time: 60 s
     heat_action:
       switch.turn_on: heater
+    #idle config
+    min_idle_time: 60 s
     idle_action:
       switch.turn_off: heater
-
+    #away config
+    away_config:
+        default_target_temperature_low: 15.555 °C
 font:
-  - file: 'OpenSans-Regular.ttf'
+  - file: './fonts/OpenSans-Regular.ttf'
     id: font1
     size: 36
-  - file: 'OpenSans-Regular.ttf'
+  - file: './fonts/OpenSans-Regular.ttf'
     id: font2
     size: 24
 
@@ -156,7 +171,7 @@ image:
   - file: 'radiator.png'
     id: pow_on
     resize: 30x30
-  - file: 'thermometer.png'
+  - file: 'set_therm.png'
     id: set_therm
     resize: 24x24
 
