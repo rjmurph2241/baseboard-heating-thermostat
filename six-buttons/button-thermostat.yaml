@@ -1,0 +1,299 @@
+substitutions:
+  devicename: "button-thermostat"
+  thermostat_name: "Button Thermostat"
+  offset: "0"
+  kwatts: '1'
+  sda_pin: '26'
+  scl_pin: '18'
+  dht_pin: '33'
+  relay_pin: '5'
+  temp_up_pin: '22'
+  temp_down_pin: '32' 
+  mode_pin: '21' 
+  preset_pin: '25'
+  min30_pin: '17'
+  hr1_pin: '27' 
+
+esphome:
+  name: $devicename
+  platform: ESP32
+  board: wemos_d1_mini32
+  
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: ${devicename}_fallback
+    password: !secret wifi_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  #password: !secret api_password
+  encryption:
+    key: !secret api_encryption
+
+ota:
+  password: !secret api_password
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+globals: #create global variable to pass subsitution to lambda in template sensor
+  - id: heater_power #used to determine the power usage of the heater
+    type: int
+    restore_value: no
+    initial_value: $kwatts
+  #timer variables; used to set how long the timer should run
+  - id: timer_count
+    type: int
+    restore_value: no
+    initial_value: '360'
+
+script:
+  id: timer #script to run thermostat on a timer
+  mode: restart
+  then:
+    #turn on thermostat
+    - climate.control:
+        id: therm
+        mode: "HEAT"
+    - while:
+        condition:
+          lambda: |-
+            return id(timer_count)> 0;
+        then:
+        - delay: 1s
+        - lambda: |-
+            id(timer_count) -= 1;
+    #turn off thermostat
+    - climate.control:
+        id: therm
+        mode: "OFF"
+
+sensor:
+  - platform: dht
+    model: AM2302
+    pin: 
+      number: $dht_pin
+    temperature:
+      id: temp
+      filters:
+        - offset: $offset
+        - median:
+            window_size: 4
+            send_every: 4
+            send_first_at: 2
+    update_interval: 3.1s
+  # current power usage sensor
+  - platform: template
+    id: power
+    name: ${thermostat_name} Power
+    internal: true
+    update_interval: 1s
+    unit_of_measurement: kW
+    lambda: |-
+      if (id(heater).state) {
+      return id(heater_power);
+      } else {
+      return 0;
+      }
+  # daily energy usage sensor
+  - platform: total_daily_energy
+    name: ${thermostat_name} Daily Energy
+    power_id: power
+
+switch:
+  #heater
+  - platform: gpio
+    pin: $relay_pin
+    id: heater
+    restore_mode: always_off
+
+binary_sensor: #buttons
+  #temp up
+  - platform: gpio
+    id: pin1
+    pin:
+      number: $temp_up_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters: 
+      - delayed_on_off: 10ms
+    on_press:
+      - lambda: |-
+          auto call = id(therm).make_call();
+          call.set_target_temperature(id(therm).target_temperature + 0.2778);
+          call.perform();
+  #temp down
+  - platform: gpio
+    id: pin2
+    pin:
+      number: $temp_down_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters: 
+      - delayed_on_off: 10ms
+    on_press:
+      - lambda: |-
+          auto call = id(therm).make_call();
+          call.set_target_temperature(id(therm).target_temperature - 0.2778);
+          call.perform();    
+  #toggle mode
+  - platform: gpio
+    id: pin3
+    pin:
+      number: $mode_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      - delayed_on_off: 10ms
+    on_press:
+      then:
+      - if:
+          condition:
+          - script.is_running: timer
+          then:
+          - script.stop: timer
+      - lambda: |-
+          auto call = id(therm).make_call();
+          if(id(therm).mode == 0) {
+            call.set_mode("HEAT");
+            //id(heater_mode) = 1;
+          }
+          else {
+            call.set_mode("OFF");
+            //id(heater_mode) = 0;
+            }
+          call.perform();
+
+  #toggle preset
+  - platform: gpio
+    id: pin4
+    pin:
+      number: $preset_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters: 
+      - delayed_on_off: 10ms
+    on_press:
+      then:
+        lambda: |-
+          auto call = id(therm).make_call();
+          if(id(therm).preset == 1) {
+            call.set_preset("AWAY");
+          }
+          else {
+            call.set_preset("HOME");
+            }
+          call.perform();
+
+  #30 min timer
+  - platform: gpio
+    id: pin5
+    pin:
+      number: $min30_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters: 
+      - delayed_on_off: 10ms
+    on_press:
+      - lambda: |-
+          id(timer_count) = 1800;
+      - script.execute: timer
+  #1 hour timer
+  - platform: gpio
+    id: pin6
+    pin:
+      number: $hr1_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters: 
+      - delayed_on_off: 10ms
+    on_press:
+      - lambda: |-
+          id(timer_count) = 3600;
+      - script.execute: timer
+
+climate:
+  - platform: thermostat
+    internal: false
+    id: therm
+    name: $thermostat_name
+    visual:
+      temperature_step: 
+        target_temperature: 0.5
+        current_temperature: 0.1
+    sensor: temp
+    #idle config
+    min_idle_time: 60 s
+    idle_action:
+      switch.turn_off: heater
+    #heating config
+    heat_deadband: 0.1 °C
+    heat_overrun: 0.1 °C
+    min_heating_off_time: 60 s
+    min_heating_run_time: 60 s
+    heat_action:
+      switch.turn_on: heater
+    default_preset: home
+    #presets
+    preset:
+      #home config
+      - name: home
+        default_target_temperature_low: 25 #77 °F 
+      #away config
+      - name: away
+        default_target_temperature_low: 20.555 #69 °F 
+
+#fonts and images for screen
+font:
+  - file: "gfonts://Open+Sans"
+    id: font1
+    size: 36
+  - file: "gfonts://Open+Sans"
+    id: font2
+    size: 24
+image:
+  - file: mdi:fire
+    id: flame
+    resize: 26x26
+  - file: mdi:radiator-off
+    id: pow_off
+    resize: 30x30
+  - file: mdi:radiator
+    id: pow_on
+    resize: 30x30
+  - file: mdi:timer
+    id: timer_png
+    resize: 24x24
+
+i2c: #for screen
+  sda: $sda_pin
+  scl: $scl_pin
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    contrast: 50%
+    #address: 0x3C
+    external_vcc: false
+    lambda: |-
+      // Print temperature
+      it.printf(81,18, id(font1), TextAlign::CENTER, "%.1f°", id(temp).state * 1.8 + 32);
+      // Print set point
+      it.printf(128,64, id(font2), TextAlign::BOTTOM_RIGHT, "%.1f°", id(therm).target_temperature *1.8 + 32);
+      // Print flame if heater is on
+      if (id(heater).state) { it.image(0,39,id(flame)); }
+      // Print power state
+      if (id(therm).mode == 0) {
+        it.image(0,0,id(pow_off));
+      }
+      else {it.image(0,0,id(pow_on));}
+      //print time remaining
+      if (id(timer).is_running()) { it.image(30,39,id(timer_png));}

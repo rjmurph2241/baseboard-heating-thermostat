@@ -1,0 +1,230 @@
+substitutions:
+  devicename: encoder-thermostat
+  thermostat_name: "Encoder Thermostat"
+  sda_pin: GPIO13
+  scl_pin: GPIO14
+  dht_pin: GPIO16
+  encode_pin_1: GPIO4
+  encode_pin_2: GPIO5
+  encode_sw_pin: GPIO0
+  relay_pin: GPIO12
+  offset: '-2.4'
+  kwatts: '1'
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp01_1m
+  esp8266_restore_from_flash: yes
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: ${devicename}_fallback
+    password: !secret wifi_password
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  #password: !secret api_password
+  encryption:
+    key: !secret api_encryption
+
+ota:
+  password: !secret ota_password
+
+script:
+  - id: encode_setpoint
+    then:
+      - sensor.rotary_encoder.set_value:
+          id: dial
+          value: !lambda "return id(therm).target_temperature_low * 18;"
+      - while:
+          condition:
+            script.is_running: encode_setpoint
+          then:
+            - lambda: |-
+                auto call = id(therm).make_call();
+                call.set_target_temperature(id(dial).state/18);
+                call.perform();
+            - delay: 0.1 s
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+globals: #create global variable to pass subsitution to lambda in template sensor
+  - id: heater_power
+    type: int
+    restore_value: yes
+    initial_value: $kwatts
+
+sensor:
+  - platform: dht
+    model: AM2302
+    pin: $dht_pin
+    temperature:
+      id: temp
+      filters:
+        - offset: $offset
+        - median:
+            window_size: 4
+            send_every: 4
+            send_first_at: 2
+    update_interval: 3s
+
+  - platform: rotary_encoder
+    id: dial
+    pin_a:
+      number: $encode_pin_1
+      mode: INPUT_PULLUP
+    pin_b:
+      number: $encode_pin_2
+      mode: INPUT_PULLUP
+
+  - platform: template
+    id: power
+    name: ${thermostat_name} Power
+    internal: true
+    update_interval: 1s
+    unit_of_measurement: kW
+    lambda: |-
+      if (id(heater).state) {
+      return id(heater_power);
+      } else {
+      return 0;
+      }
+
+  - platform: total_daily_energy
+    name: ${thermostat_name} Daily Energy
+    power_id: power
+
+switch:
+  #heater
+  - platform: gpio
+    pin: $relay_pin
+    id: heater
+    restore_mode: always_off
+  #switch to activate/cancel setting the temperature
+  - platform: template
+    id: template_switch
+    restore_mode: always_off
+    optimistic: true
+    turn_on_action:
+      - script.execute: encode_setpoint
+    turn_off_action:
+      - script.stop: encode_setpoint
+
+binary_sensor:
+  - platform: gpio
+    id: encode_sw
+    pin:
+      number: $encode_sw_pin
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      - delayed_on_off: 10ms
+    on_multi_click:
+      #short click to set temperature
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - logger.log: "Single Short Click"
+          - switch.toggle: template_switch
+      #long click to change turn heating on/off
+      - timing:
+          - ON for at least 1s
+        then:
+          - logger.log: "Single Long Click"
+          - lambda: |-
+              auto call = id(therm).make_call();
+              if(id(therm).mode == 0) {
+                call.set_mode("HEAT");
+                //id(heater_mode) = 1;
+              }
+              else {
+                call.set_mode("OFF");
+                //id(heater_mode) = 0;
+                }
+              call.perform();
+
+climate:
+  - platform: thermostat
+    internal: false
+    id: therm
+    name: $thermostat_name
+    on_boot_restore_from: MEMORY
+    sensor: temp
+    #idle config
+    min_idle_time: 60 s
+    idle_action:
+      switch.turn_off: heater
+    #heating config
+    heat_deadband: 0.1 °C
+    heat_overrun: 0.1 °C
+    min_heating_off_time: 60 s
+    min_heating_run_time: 60 s
+    heat_action:
+      switch.turn_on: heater
+    default_preset: home
+    #presets
+    preset:
+      #home config
+      - name: home
+        default_target_temperature_low: 20
+      #away config
+      - name: away
+        default_target_temperature_low: 15.555 °C
+
+font:
+  - file: "gfonts://Open+Sans"
+    id: font1
+    size: 36
+  - file: "gfonts://Open+Sans"
+    id: font2
+    size: 24
+image:
+  - file: mdi:fire
+    id: flame
+    resize: 26x26
+  - file: mdi:radiator-off
+    id: pow_off
+    resize: 30x30
+  - file: mdi:radiator
+    id: pow_on
+    resize: 30x30
+  - file: mdi:thermometer-lines
+    id: set_therm
+    resize: 24x24
+
+i2c:
+  sda: $sda_pin
+  scl: $scl_pin
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    #address: 0x3C
+    external_vcc: false
+    lambda: |-
+      // Print temperature
+      it.printf(81,18, id(font1), TextAlign::CENTER, "%.1f°", id(temp).state * 1.8 + 32);
+      // Print set points if thermostat is on
+      if (id(therm).mode != 0) {
+      //it.printf(86,38, id(font2), TextAlign::TOP_LEFT, "%.1f°", id(therm).target_temperature *1.8 + 32);
+      it.printf(128,64, id(font2), TextAlign::BOTTOM_RIGHT, "%.1f°", id(therm).target_temperature *1.8 + 32);
+      }
+      // Print flame if heater is on
+      if (id(heater).state) { it.image(0,39,id(flame)); }
+      // Print power state
+      if (id(therm).mode == 0) {
+        it.image(0,0,id(pow_off));
+      }
+      else {it.image(0,0,id(pow_on));}
+      //Print if currently editing setpoint
+      if(id(template_switch).state) {it.image(38,39,id(set_therm));}
