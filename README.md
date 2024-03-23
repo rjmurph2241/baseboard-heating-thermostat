@@ -12,7 +12,7 @@ A while back, I wanted to add smart thermostats to my apartment.  However, I was
 
 [**Rotary Encoder**](/rotary-encoder/Rotary-Encoder.md) | [**Six Buttons**](/six-buttons/Six-Buttons.md)
 :--------------------------------------------------:|:----------------------------------------------------------:
-![](rotary-encoder\images\finished_thermostat.jpg)  |  ![](six-buttons\images\finished-thermostat-buttons.jpg)
+![](/rotary-encoder/images/finished_thermostat.jpg)  |  ![](/six-buttons/images/finished-thermostat-buttons.jpg)
 
 
 
