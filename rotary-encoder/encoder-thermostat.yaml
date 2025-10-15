@@ -13,9 +13,11 @@ substitutions:
 
 esphome:
   name: $devicename
-  platform: ESP8266
+  friendly_name: $thermostat_name
+  
+esp8266:
   board: esp01_1m
-  esp8266_restore_from_flash: yes
+  restore_from_flash: true
 
 wifi:
   ssid: !secret wifi_ssid
@@ -36,6 +38,7 @@ api:
     key: !secret api_encryption
 
 ota:
+  platform: esphome
   password: !secret ota_password
 
 script:
@@ -157,7 +160,7 @@ climate:
   - platform: thermostat
     internal: false
     id: therm
-    name: $thermostat_name
+    name: None
     on_boot_restore_from: MEMORY
     sensor: temp
     #idle config

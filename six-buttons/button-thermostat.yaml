@@ -16,7 +16,9 @@ substitutions:
 
 esphome:
   name: $devicename
-  platform: ESP32
+  friendly_name: $thermostat_name
+
+esp32:
   board: wemos_d1_mini32
   
 wifi:
@@ -224,7 +226,7 @@ climate:
   - platform: thermostat
     internal: false
     id: therm
-    name: $thermostat_name
+    name: None
     visual:
       temperature_step: 
         target_temperature: 0.5

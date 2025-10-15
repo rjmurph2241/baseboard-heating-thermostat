@@ -43,7 +43,7 @@ In order to get the OLED display to fit into the case, I de-soldered the header 
 ![OLED](/six-buttons/images/soldered-screen.jpg)
 
 ### Case ###
-The case was designed in Alibre Atom 3D.  I've included the [original file](/six-buttons/thermostat_cover_buttons.AD_PRT) as well as the [.stl](/six-buttons/thermostat_cover_buttons.stl) and [STEP](/six-buttons/thermostat_cover_buttons.stp) files if anyone wants to modify them.  I printed mine on my Ender 3 Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.
+The case was designed in Alibre Atom 3D.  I've included the [original file](/six-buttons/thermostat_cover_buttons.AD_PRT) as well as the .stl and STEP files (on [Printables](https://www.printables.com/model/1037639-smart-baseboard-heater-thermostat)) if anyone wants to modify them.  I printed mine on my Ender 3 Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.
 
 ![case](/six-buttons/images/six-button-cad.jpg)
 

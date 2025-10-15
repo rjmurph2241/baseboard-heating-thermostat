@@ -60,7 +60,7 @@ The encoder has 2 separate connections.  The encoder and the push button.  For t
 ![encoder](/rotary-encoder/images/encoder.jpg)
 
 ### Case
-The case was designed in Alibre Atom 3D.  I've included the [original file](/rotary-encoder/thermostat_cover_rotary_encoder.AD_PRT) as well as the [.stl](/rotary-encoder/thermostat_cover.stl) and [STEP](/rotary-encoder/thermostat_cover.stp) files if anyone wants to modify them.  I printed mine on my Monoprice Select Mini Pro in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
+The case was designed in Alibre Atom 3D.  I've included the [original file](/rotary-encoder/thermostat_cover_rotary_encoder.AD_PRT) as well as the .stl and STEP files (on [Printables](https://www.printables.com/model/1037639-smart-baseboard-heater-thermostat)) if anyone wants to modify them.  I printed mine on my Ender 3V2 in black PETG.  You can print it either face up or face down.  Face up requires a lot more filament for supports but gives you a better front surface.  Face down, you still need supports for where the rotary encoder goes.
 
 ![case](/rotary-encoder/images/cad_front.jpg)
 
